@@ -7,8 +7,18 @@
     <title>@yield('title')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+@hasSection('hide-sidebar')
 <body class="@yield('classe-body')">
-@vite('resources/js/app.js')
-@yield('content')
+    @yield('content')
+@else
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary @yield('classe-body')">
+    <div class="app-wrapper">
+        @include('layouts.partials.sidebar')
+        <main class="app-main">
+            @yield('content')
+        </main>
+    </div>
+@endif
+    @vite('resources/js/app.js')
 </body>
 </html>

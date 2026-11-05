@@ -1,23 +1,30 @@
 @extends('layouts.default')
 @section('classe-body', 'register-page', 'register-page bg-body-secondary')
 @section('content')
-</main>
-    <main>
     @if (session('status'))
-    <p>{{ session('status') }}</p>
-    @endif
-    @foreach ($users as $user )
-    <h1> Nome: {{ $user->name }}</h1>
-    <p> Enail: {{ $user->email }}</p>
-
-    @if($user->id === 10)
-        <p>Usuario com id 10</p>
-    @else
-        <p>Usuario com id  <> 10</p>
+        <p>{{ session('status') }}</p>
     @endif
 
-    @endforeach
+    <div class="app-content-header">
+        <div class="container-fluid">
+            <h1>Lista de usuários</h1>
+        </div>
+    </div>
 
-    {{ $users->links() }}
-</main>
+    <div class="app-content">
+        <div class="container-fluid">
+            @forelse ($users as $user)
+                <section class="card mb-3">
+                    <div class="card-body">
+                        <h2 class="h5">Nome: {{ $user->name }}</h2>
+                        <p class="mb-0">Email: {{ $user->email }}</p>
+                    </div>
+                </section>
+            @empty
+                <p>Nenhum usuário cadastrado.</p>
+            @endforelse
+
+            {{ $users->links() }}
+        </div>
+    </div>
 @endsection
