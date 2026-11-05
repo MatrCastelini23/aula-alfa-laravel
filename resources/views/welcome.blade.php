@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('hide-sidebar', true)
 @section('classe-body', 'login-page bg-body-secondary')
 @section('title', 'Login')
 @section('content')
