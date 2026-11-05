@@ -1,6 +1,5 @@
 @extends('layouts.default')
-@section('hide-sidebar', true)
-@section('classe-body', 'register-page', 'register-page bg-body-secondary')
+@section('classe-body', 'login-page bg-body-secondary')
 @section('title', 'Login')
 @section('content')
     <main class="login-box">
@@ -11,8 +10,15 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Entre com seu email e senha</p>
 
-                <form
+                <form action="{{ route('login.attempt') }}" method="POST">
                     @csrf
+
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
 
                     @if (session('status'))
                         <div class="text-success mb-2">{{ session('status') }}</div>
