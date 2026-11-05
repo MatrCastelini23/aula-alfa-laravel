@@ -4,6 +4,34 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+@media (min-width: 992px) {
+    body.layout-fixed.sidebar-expand-lg .app-wrapper {
+        display: block;
+        min-height: 100vh;
+    }
+
+    body.layout-fixed.sidebar-expand-lg .app-sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        height: 100vh;
+        max-height: 100vh;
+    }
+
+    body.layout-fixed.sidebar-expand-lg .sidebar-wrapper {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    body.layout-fixed.sidebar-expand-lg .app-main {
+        width: calc(100% - var(--lte-sidebar-width));
+        max-width: calc(100% - var(--lte-sidebar-width));
+        min-height: 100vh;
+        margin-left: var(--lte-sidebar-width);
+    }
+}
+
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
