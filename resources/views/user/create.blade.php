@@ -6,7 +6,7 @@
         <h1 class="register-logo">
             <a href="../index2.html"><b>Bem vindo</b></a>
         </h1>
-        
+
         <div class="card">
             <div class="card-body register-card-body">
                 <p class="register-box-msg">Preencha os campos para se registrar</p>

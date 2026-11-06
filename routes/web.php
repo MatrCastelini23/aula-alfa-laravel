@@ -5,7 +5,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.index');
 });
 
 // Visitantes (não logados)
@@ -20,8 +20,8 @@ Route::middleware('guest')->group(function () {
 // Qualquer usuário logado
 Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
 });
-
 // Somente administradores
 Route::middleware(['auth', 'admin'])
     ->prefix('admin')

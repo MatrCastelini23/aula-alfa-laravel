@@ -17,7 +17,7 @@ class AdminMiddleware
     {
         $user = $request->user();
         if (! $user || ! $user->is_admin) {
-            return response()->json(['message' => 'Some daqui, você não é adm'], 403);
+            abort(403, 'Acesso restrito a administradores.');
         }
 
         return $next($request);
