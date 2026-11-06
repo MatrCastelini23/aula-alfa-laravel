@@ -14,13 +14,6 @@
                 <form action="{{ route('login.attempt') }}" method="POST">
                     @csrf
 
-
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger">{{ $error }}</div>
-        @endforeach
-    @endif
-
                     @if (session('status'))
                         <div class="text-success mb-2">{{ session('status') }}</div>
                     @endif
