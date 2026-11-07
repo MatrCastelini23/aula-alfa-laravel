@@ -8,7 +8,7 @@ Pedro Henrique Gonçalvez de Souza -- RA: 250275
 ### Rodando o projeto
 
 - Clone o repositório na sua maquina. <br>
-git clone https://github.com/chsguitar1/fed-produto-pet-app
+git clone https://github.com/MatrCastelini23/aula-alfa-laravel.git
 
 - Rode o comando para instalar as dependecias do Node <br>
 npm install
