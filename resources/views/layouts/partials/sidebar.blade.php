@@ -22,10 +22,12 @@
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <button type="button" class="nav-link w-100 text-start border-0 bg-transparent">
-                        <i class="nav-icon bi bi-box-arrow-right"></i>
-                        <p>Sair</p>
-                    </button>
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-box-arrow-right"></i> Sair
+                        </button>
+                    </form>
                 </li>
             </ul>
         </nav>
