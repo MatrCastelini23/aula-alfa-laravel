@@ -17,7 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => AdminMiddleware::class,
         ]);
 
-        $middleware->redirectUsersTo(fn () => route('admin.users.index'));
+        $middleware->redirectUsersTo(fn (Request $request) => $request->user()?->isAdmin()
+    ? route('admin.users.index')
+    : url('/'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

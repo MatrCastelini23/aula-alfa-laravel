@@ -16,9 +16,12 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-        if (! $user || ! $user->is_admin) {
-            abort(403, 'Acesso restrito a administradores.');
+
+        if (! $user) {
+            return redirect()->route('login');
         }
+
+        abort_unless($user->isAdmin(), 403, 'Acesso restrito a administradores.');
 
         return $next($request);
     }

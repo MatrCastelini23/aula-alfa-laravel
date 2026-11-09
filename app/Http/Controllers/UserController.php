@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -58,8 +59,24 @@ class UserController extends Controller
 
         $input['password'] = Hash::make($input['password']);
 
-        User::create($input);
+        $user = User::create($input);
+        $user->profile()->create([
+            'type' => 'user',
+            'description' => 'Usuário comum',
+        ]);
 
-        return redirect()->route('admin.users.index');
+        if (Auth::check() && Auth::user()->isAdmin()) {
+            return redirect()
+                ->route('admin.users.index')
+                ->with('status', 'Usuário criado com sucesso.');
+        }
+
+        if (Auth::check()) {
+            return redirect('/')->with('status', 'Usuário criado com sucesso.');
+        }
+
+        return redirect()
+            ->route('login')
+            ->with('status', 'Conta criada! Faça login para continuar.');
     }
 }

@@ -13,6 +13,7 @@
 @else
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary @yield('classe-body')">
     <div class="app-wrapper">
+        @include('layouts.partials.header')
         @include('layouts.partials.sidebar')
         <main class="app-main">
             @yield('content')
