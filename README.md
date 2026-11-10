@@ -70,3 +70,26 @@ Ajuda a dificultar força bruta e adivinhação de senhas. Limitações: quem us
 
 **Como provisionar o primeiro administrador sem expor essa capacidade ao público?**
 Por um canal controlado fora da aplicação pública: seeder de desenvolvimento, comando Artisan próprio ou inserção direta no banco por quem administra o ambiente. A senha vem de variável de ambiente ou é trocada após o primeiro acesso. O formulário público nunca aceita o tipo de perfil, e o campo não é preenchido a partir da requisição.
+
+
+# Telas: 
+
+## Login: 
+
+![alt text](image.png)
+
+## Painel Administrador:
+
+![alt text](image-1.png)
+
+## Edição de Usuario:
+
+![alt text](image-2.png)
+
+## Painel de usuario não adm:
+
+![alt text](image-3.png)
+
+## Usuario não adm acessando rotas protegidas:
+
+![alt text](image-4.png)
