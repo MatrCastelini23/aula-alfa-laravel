@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -24,6 +27,48 @@ class UserController extends Controller
         return view('user.show', [
             'user' => $user,
         ]);
+    }
+
+    public function edit(User $user): View
+    {
+        return view('user.edit', [
+            'user' => $user,
+        ]);
+    }
+
+    public function update(Request $request, User $user): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($user),
+            ],
+        ]);
+
+        $user->update($validated);
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with('status', 'Usuário atualizado com sucesso.');
+    }
+
+    public function destroy(Request $request, User $user): RedirectResponse
+    {
+        if ($request->user()->is($user)) {
+            return redirect()
+                ->route('admin.users.index')
+                ->with('error', 'Você não pode excluir sua própria conta.');
+        }
+
+        $user->delete();
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with('status', 'Usuário excluído com sucesso.');
     }
 
     public function resetForm(User $user)

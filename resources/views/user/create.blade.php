@@ -3,47 +3,81 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastro</title>
+    <meta name="theme-color" content="#f4f7fb">
+    <title>Criar conta | Aula Alfa</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-rc4/dist/css/adminlte.min.css">
 </head>
-<body class="register-page bg-body-secondary">
-    <main class="register-box">
-        <div class="card">
-            <div class="card-body register-card-body">
-                <p class="register-box-msg">Preencha os campos para se cadastrar</p>
+<body class="auth-page">
+    <main class="auth-shell" id="main">
+        <section class="auth-card" aria-labelledby="auth-title">
+            <a class="auth-brand" href="{{ route('login') }}" aria-label="Aula Alfa, página de login">
+                <span class="app-brand-mark"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span>
+                <span>Aula Alfa</span>
+            </a>
 
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger">{{ $error }}</div>
-                @endforeach
-
-                <form action="{{ route('users.store') }}" method="POST">
-                    @csrf
-                    <div class="input-group mb-3">
-                        <input name="name" type="text" class="form-control"
-                               placeholder="Nome" value="{{ old('name') }}" autofocus>
-                        <div class="input-group-text"><span class="bi bi-person"></span></div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input name="email" type="email" class="form-control"
-                               placeholder="Email" value="{{ old('email') }}">
-                        <div class="input-group-text"><span class="bi bi-envelope"></span></div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input name="password" type="password" class="form-control" placeholder="Senha">
-                        <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    </div>
-                </form>
-
-                <p class="mb-0 mt-3 text-center">
-                    Já tem conta? <a href="{{ route('login') }}">Entrar</a>
-                </p>
+            <div class="auth-heading">
+                <span class="eyebrow">JUNTE-SE A NÓS</span>
+                <h1 id="auth-title">Crie sua conta</h1>
+                <p>Preencha seus dados para começar.</p>
             </div>
-        </div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger app-alert" role="alert">
+                    <i class="bi bi-exclamation-circle me-2" aria-hidden="true"></i>
+                    <div>
+                        @foreach ($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            <form action="{{ route('users.store') }}" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <input id="name" name="name" type="text"
+                           class="form-control @error('name') is-invalid @enderror"
+                           placeholder="Seu nome completo" value="{{ old('name') }}"
+                           autocomplete="name" required autofocus>
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input id="email" name="email" type="email"
+                           class="form-control @error('email') is-invalid @enderror"
+                           placeholder="voce@exemplo.com" value="{{ old('email') }}"
+                           autocomplete="email" required>
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="form-label">Senha</label>
+                    <input id="password" name="password" type="password"
+                           class="form-control @error('password') is-invalid @enderror"
+                           placeholder="Mínimo de 8 caracteres" autocomplete="new-password" required>
+                    @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <div class="form-text">Use pelo menos 8 caracteres.</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 auth-submit">
+                    Criar conta <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i>
+                </button>
+            </form>
+
+            <p class="auth-footer">
+                Já tem uma conta?
+                <a href="{{ route('login') }}">Entrar</a>
+            </p>
+        </section>
+        <p class="auth-caption">Uma experiência simples para você.</p>
     </main>
 </body>
 </html>
