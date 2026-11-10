@@ -22,6 +22,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/create', [UserController::class, 'register'])->name('users.create');
     Route::get('user/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('user/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('user/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('user/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('user/{user}/resetForm', [UserController::class, 'resetForm'])->name('users.resetForm');
     Route::post('user/{user}/resetForm', [UserController::class, 'resetPassword'])->name('users.reset');
 });
